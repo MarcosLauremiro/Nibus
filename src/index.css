@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.custom-google-button {
+    width: 350px !important;
+    height: 41px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
