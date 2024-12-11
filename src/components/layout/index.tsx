@@ -1,39 +1,26 @@
 import React from 'react';
-import {MenuFoldOutlined, MenuUnfoldOutlined,} from '@ant-design/icons';
-import { Button, Layout, theme } from 'antd';
-import { useDispatch, useSelector } from 'react-redux';
-import { toggleDarkMode } from '../../store/darkmode/darkModeSlice';
-import { toggleCollapsed } from '../../store/collapsed/CollapsedSlice';
-import { RootState } from '../../store/store';
+import { Layout, theme } from 'antd';
 import { SideComponent } from './side';
+import { HeaderComponent } from './header';
 
 const { Header, Content } = Layout;
 
-export const LayoutComponent: React.FC = () => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export const LayoutComponent: React.FC<LayoutProps> = ({children}) => {
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();
 
-  const isdarkMode = useSelector((state: RootState) => state.darkMode.isDarkMode);
-  const dispatch = useDispatch();
+
 
   return (
     <Layout>
       <SideComponent/>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }}>
-          <Button
-            type="text"
-            icon={isdarkMode ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => dispatch(toggleCollapsed())}
-            style={{
-              fontSize: '16px',
-              width: 64,
-              height: 64,
-            }}
-          />
-          <Button onClick={() => dispatch(toggleDarkMode())}>color</Button>
-        </Header>
+        <HeaderComponent />
         <Content
           style={{
             margin: '24px 16px',
@@ -43,7 +30,7 @@ export const LayoutComponent: React.FC = () => {
             borderRadius: borderRadiusLG,
           }}
         >
-          Content
+          {children}
         </Content>
       </Layout>
     </Layout>

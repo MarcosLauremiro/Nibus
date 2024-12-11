@@ -1,103 +1,112 @@
-import Sider from 'antd/es/layout/Sider';
 import React from 'react';
-import { Logo } from '../../logo';
-import { Menu } from 'antd';
+import { AppstoreOutlined, CustomerServiceOutlined, DollarOutlined, FilePdfOutlined, PlusCircleOutlined, SettingOutlined, TeamOutlined, TruckOutlined } from '@ant-design/icons';
+import type { MenuProps } from 'antd';
+import { Flex, Menu } from 'antd';
+import Sider from 'antd/es/layout/Sider';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { toggleCollapsed } from '../../../store/collapsed/CollapsedSlice';
-import type { MenuProps } from 'antd';
-import {
-  PlusCircleOutlined,
-  TruckOutlined,
-  AppstoreOutlined,
-  DollarOutlined,
-  DiffOutlined,
-  TeamOutlined,
-} from '@ant-design/icons';
+import { Logo, LogoSlim } from '../../logo';
+import { ButtonGradient } from '../../button/gradientButton';
+import { PlusIcon } from '../../../utils/icons/PlusIcon';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
+const iconSize: object = { fontSize: "20px" }
 
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[],
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-    type: 'item',
-  } as MenuItem;
-}
+const items: MenuItem[] = [
+  {
+    key: "gro",
+    label: 'Menu',
+    type: 'group',
+    children: [
+      {
+        key: 'sub1',
+        label: 'Dashboard',
+        icon: <AppstoreOutlined style={iconSize}/>,
+      },
+      {
+        key: 'sub2',
+        label: 'Emissões',
+        icon: <PlusCircleOutlined style={iconSize}/>,
+        children: [
+          { key: '5', label: 'Emitir CTe' },
+          { key: '6', label: 'Emitir MDFe' },
+          { key: '7', label: 'Emitir Contrato' },
+        ],
+      },
+      {
+        key: 'sub3',
+        label: 'Documentos',
+        icon: <FilePdfOutlined style={iconSize}/>,
+        children: [
+          { key: '8', label: 'Listar CTe' },
+          { key: '9', label: 'Listar MDFe' },
+          { key: '10', label: 'Emitir Contratos' },
+        ],
+      }, {
+        key: 'sub4',
+        label: 'Financeiro',
+        icon: <DollarOutlined style={iconSize} />,
+        children: [
+          { key: '11', label: 'Receitas' },
+          { key: '12', label: 'Despesas' },
+          { key: '13', label: 'Relatórios' },
+        ],
+      },
+      {
+        key: 'sub5',
+        label: 'Envolvidos',
+        icon: <TeamOutlined style={iconSize} />,
+        children: [
+          { key: '14', label: 'Listar Envolvidos' },
+          { key: '15', label: 'Novo Envolvido' },
+        ],
+      },
+      {
+        key: 'sub6',
+        label: 'Veículos',
+        icon: <TruckOutlined style={iconSize} />,
+        children: [
+          { key: '16', label: 'Listar Veículos' },
+          { key: '17', label: 'Novos Veículos' },
+        ],
+      },
+    ]
+  },
 
-const iconSize:object = {fontSize: "20px"}
-
-const menuItems: MenuItem[] = [
-  getItem('Dashboard', '1', <AppstoreOutlined style={iconSize}/>),
-  getItem('Emissões', '2', <PlusCircleOutlined style={iconSize}/>, [
-    getItem('Emitir CTe', '2.1'),
-    getItem('Emitir MDFe', '2.2'),
-    getItem('Emitir Contrato', '2.3'),
-  ]),
-  getItem('Documentos', '3', <DiffOutlined style={iconSize}/>, [
-    getItem('Listar CTe', '3.1'),
-    getItem('Listar MDFe', '3.2'),
-    getItem('Emitir Contratos', '3.3'),
-  ]),
-  getItem('Financeiro', '4', <DollarOutlined style={iconSize}/>, [
-    getItem('Receitas', '4.1'),
-    getItem('Despesas', '4.2'),
-    getItem('Relatórios', '4.3'),
-  ]),
-  getItem('Envolvidos', '5', <TeamOutlined style={iconSize}/>, [
-    getItem('Listar Envolvidos', '5.1'),
-    getItem('Novo Envolvido', '5.2'),
-  ]),
-  getItem('Veículos', '6', <TruckOutlined style={iconSize}/>, [
-    getItem('Listar Veículos', '6.1'),
-    getItem('Novos Veículos', '6.2'),
-  ]),
-];
-
-const plataformaItems: MenuItem[] = [
-  getItem('Suporte', '7', <AppstoreOutlined />),
-  getItem('Configurações', '8', <AppstoreOutlined />),
+  {
+    key: 'pla',
+    label: 'Plataforma',
+    type: 'group',
+    children: [
+      { key: '18', label: 'Suporte', icon: <CustomerServiceOutlined style={iconSize}/> },
+      { key: '19', label: 'Configurações', icon: <SettingOutlined style={iconSize}/> },
+    ],
+  },
 ];
 
 export const SideComponent: React.FC = () => {
+  const onClick: MenuProps['onClick'] = (e) => {
+    console.log('click ', e);
+  };
+
   const collapsed = useSelector((state: RootState) => state.collapseSlice.isCollapsed);
   const dispatch = useDispatch();
 
   return (
-    <Sider collapsible collapsed={collapsed} onCollapse={() => dispatch(toggleCollapsed())}>
-      <div className="demo-logo-vertical flex items-center justify-center" />
-      <Logo />
-      <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline">
-        <Menu.ItemGroup key="menu" title="Menu">
-          {menuItems.map((item) =>
-            item ? (
-              'icon' in item ? (
-                <Menu.Item key={item.key} icon={item.icon}>
-                  {item.label}
-                </Menu.Item>
-              ) : null) : null
-          )}
-        </Menu.ItemGroup>
-        <Menu.ItemGroup key="plataforma" title="Plataforma">
-          {plataformaItems.map((item) => (
-            item ? (
-              'icon' in item ? (
-                <Menu.Item key={item.key} icon={item.icon}>
-                  {item.label}
-                </Menu.Item>
-              ) : null
-            ) : null
-          ))}
-        </Menu.ItemGroup>
-      </Menu>
+    <Sider className='flex flex-col h-screen align-center justify-center' width={240} theme='light' collapsible collapsed={collapsed} onCollapse={() => dispatch(toggleCollapsed())}>
+      <Flex vertical gap={50} justify='center' align='center' className='mt-[20px]'>
+        {collapsed ? <LogoSlim width={44} /> : <Logo />}
+        {collapsed ? <ButtonGradient width='43px'> <PlusIcon /></ButtonGradient> : <ButtonGradient width='208px'><PlusIcon /> Emitir documento</ButtonGradient>}
+      </Flex>
+      <Menu
+        onClick={onClick}
+        defaultSelectedKeys={['1']}
+        defaultOpenKeys={['sub1']}
+        mode="inline"
+        items={items}
+      />
     </Sider>
   );
 };

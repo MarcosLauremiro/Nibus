@@ -61,7 +61,7 @@ export const ConfigureAntdTheme: React.FC<ConfigureAntdThemeProps> = ({ children
                         border-radius: 40px;
                     }
                     :where(.css-dev-only-do-not-override-tnivdb).ant-steps .ant-steps-item-finish>.ant-steps-item-container>.ant-steps-item-content>.ant-steps-item-title::after {
-                        background: linear-gradient(90deg, #3CDA91, #3676DD);
+                        background: linear-gradient(90deg, #3676DD, #3CDA91);
                     }
                     :where(.css-dev-only-do-not-override-tnivdb).ant-steps .ant-steps-item-finish .ant-steps-item-icon >.ant-steps-icon {
                         color: #fff;
@@ -71,6 +71,19 @@ export const ConfigureAntdTheme: React.FC<ConfigureAntdThemeProps> = ({ children
                     }
                     :where(.css-dev-only-do-not-override-tnivdb).ant-form-item .ant-form-item-label >label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
                         display: none;
+                    }
+
+                    :where(.css-dev-only-do-not-override-tnivdb).ant-menu-light .ant-menu-item-selected, :where(.css-dev-only-do-not-override-tnivdb).ant-menu-light>.ant-menu .ant-menu-item-selected {
+                        background: linear-gradient(90deg, #3676DD, #3CDA91);
+                    }
+                    :where(.css-dev-only-do-not-override-tnivdb).ant-menu-light.ant-menu-root.ant-menu-inline, :where(.css-dev-only-do-not-override-tnivdb).ant-menu-light>.ant-menu.ant-menu-root.ant-menu-inline, :where(.css-dev-only-do-not-override-tnivdb).ant-menu-light.ant-menu-root.ant-menu-vertical, :where(.css-dev-only-do-not-override-tnivdb).ant-menu-light>.ant-menu.ant-menu-root.ant-menu-vertical {
+                        border: none;
+                    }
+                    .ant-menu-item {
+                        gap: 8px;
+                    }
+                    .ant-menu-submenu-title {
+                        gap: 8px;
                     }
                 `}
             </style>

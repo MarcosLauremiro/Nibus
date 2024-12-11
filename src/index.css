@@ -13,3 +13,6 @@
     align-items: center;
     justify-content: center;
   }
+.button-gradient{
+    background: linear-gradient(90deg, #3CDA91, #3676DD);
+}

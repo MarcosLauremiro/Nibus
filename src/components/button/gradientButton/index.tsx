@@ -1,54 +1,15 @@
 import React from 'react';
-import { AntDesignOutlined } from '@ant-design/icons';
-import { Button, ConfigProvider, Space } from 'antd';
-import { createStyles } from 'antd-style';
-
-const useStyle = createStyles(({ prefixCls, css }) => ({
-  linearGradientButton: css`
-    &.${prefixCls}-btn-primary:not([disabled]):not(.${prefixCls}-btn-dangerous) {
-      border-width: 0;
-
-      > span {
-        position: relative;
-      }
-
-      &::before {
-        content: '';
-        background: linear-gradient(135deg, #6253e1, #04befe);
-        position: absolute;
-        inset: 0;
-        opacity: 1;
-        transition: all 0.3s;
-        border-radius: inherit;
-      }
-
-      &:hover::before {
-        opacity: 0;
-      }
-    }
-  `,
-}));
 
 interface ButtonComponentProps {
     children?: React.ReactNode;
+    width?: string;
 }
 
-const App: React.FC<ButtonComponentProps> = ({children}) => {
-  const { styles } = useStyle();
+export const ButtonGradient: React.FC<ButtonComponentProps> = ({children, width}) => {
 
   return (
-    <ConfigProvider
-      button={{
-        className: styles.linearGradientButton,
-      }}
-    >
-      <Space>
-        <Button type="primary" size="large" icon={<AntDesignOutlined />}>
+        <button style={{width: width}} className={`button-gradient rounded-lg h-[41px] text-white gap-[10px] flex items-center justify-center background`}>
           {children}
-        </Button>
-      </Space>
-    </ConfigProvider>
+        </button>
   );
 };
-
-export default App;
