@@ -6,6 +6,7 @@ import { GoogleButton } from "../../components/button/googleButton";
 import { FormLogin } from "../../components/forms/formLogin";
 
 export const LoginPage: React.FC = () => {
+
     return (
         <Flex vertical className="p-10 bg-[#EFF2EF] w-screen h-screen">
             <Flex vertical align="end" className="h-full rounded-lg bg-no-repeat bg-center" style={{ backgroundImage: `url(${cover})`, backgroundSize: 'cover' }}>

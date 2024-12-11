@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: import.meta.env.API_URL,
+  baseURL: "https://nimbus-tms-api-production.up.railway.app",
   headers: {
     "Content-Type": "application/json;charset=UTF-8",
   },
