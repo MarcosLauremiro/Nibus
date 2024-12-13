@@ -43,10 +43,10 @@ export const FormLogin: React.FC = () => {
             <Form.Item<FieldType>
                 label="Email de Usuario"
                 name="email"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, message: 'Por favor digite seu email' }]}
                 className="m-0"
             >
-                <Input className={StyleImput} />
+                <Input type='email' className={StyleImput} />
             </Form.Item>
 
             <Flex vertical align='end' justify='end'>

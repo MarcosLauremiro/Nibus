@@ -1,34 +1,23 @@
 import React from 'react';
-import { Layout, theme } from 'antd';
+import { Layout } from 'antd';
 import { SideComponent } from './side';
 import { HeaderComponent } from './header';
 
-const { Header, Content } = Layout;
+const { Content } = Layout;
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const LayoutComponent: React.FC<LayoutProps> = ({children}) => {
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
-
-
+export const LayoutComponent: React.FC<LayoutProps> = ({ children }) => {
 
   return (
     <Layout>
-      <SideComponent/>
-      <Layout>
+      <SideComponent />
+      <Layout className='bg-slate-200'>
         <HeaderComponent />
         <Content
-          style={{
-            margin: '24px 16px',
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
+          className='ml-[20px] bg-white'
         >
           {children}
         </Content>

@@ -5,15 +5,14 @@ import { LoginPage } from "../pages/Login";
 import { LayoutComponent } from "../components/layout";
 import { DashboardPage } from "../pages/Dashboard";
 import { ProtectRouter } from "./protectRouter";
+import { ListCarPage } from "../pages/Car/NewVehicles";
 
 export const RouterMain: React.FC = () => {
     return (
         <Routes>
-            {/* Rota pública */}
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<Register />} />
 
-            {/* Rota protegida */}
             <Route element={<ProtectRouter />}>
                 <Route 
                     path="/dashboard" 
@@ -23,6 +22,7 @@ export const RouterMain: React.FC = () => {
                         </LayoutComponent>
                     } 
                 />
+                <Route path="/vehicles/new" element={<LayoutComponent><ListCarPage/></LayoutComponent>} />
             </Route>
         </Routes>
     );

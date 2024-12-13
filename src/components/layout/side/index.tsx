@@ -1,14 +1,15 @@
 import React from 'react';
 import { AppstoreOutlined, CustomerServiceOutlined, DollarOutlined, FilePdfOutlined, PlusCircleOutlined, SettingOutlined, TeamOutlined, TruckOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import { Flex, Menu } from 'antd';
+import { Button, Flex, Menu } from 'antd';
 import Sider from 'antd/es/layout/Sider';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
 import { toggleCollapsed } from '../../../store/collapsed/CollapsedSlice';
 import { Logo, LogoSlim } from '../../logo';
-import { ButtonGradient } from '../../button/gradientButton';
-import { PlusIcon } from '../../../utils/icons/PlusIcon';
+import { DropdownEmitirDocumentComponent } from '../../button/dropdownEmitirDocument';
+import { MenuUnfold } from '../../../utils/icons/MenuUnfold';
+import { MenuOutfold } from '../../../utils/icons/MenuOutfold';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
@@ -23,12 +24,12 @@ const items: MenuItem[] = [
       {
         key: 'sub1',
         label: 'Dashboard',
-        icon: <AppstoreOutlined style={iconSize}/>,
+        icon: <AppstoreOutlined style={iconSize} />,
       },
       {
         key: 'sub2',
         label: 'Emissões',
-        icon: <PlusCircleOutlined style={iconSize}/>,
+        icon: <PlusCircleOutlined style={iconSize} />,
         children: [
           { key: '5', label: 'Emitir CTe' },
           { key: '6', label: 'Emitir MDFe' },
@@ -38,7 +39,7 @@ const items: MenuItem[] = [
       {
         key: 'sub3',
         label: 'Documentos',
-        icon: <FilePdfOutlined style={iconSize}/>,
+        icon: <FilePdfOutlined style={iconSize} />,
         children: [
           { key: '8', label: 'Listar CTe' },
           { key: '9', label: 'Listar MDFe' },
@@ -80,8 +81,8 @@ const items: MenuItem[] = [
     label: 'Plataforma',
     type: 'group',
     children: [
-      { key: '18', label: 'Suporte', icon: <CustomerServiceOutlined style={iconSize}/> },
-      { key: '19', label: 'Configurações', icon: <SettingOutlined style={iconSize}/> },
+      { key: '18', label: 'Suporte', icon: <CustomerServiceOutlined style={iconSize} /> },
+      { key: '19', label: 'Configurações', icon: <SettingOutlined style={iconSize} /> },
     ],
   },
 ];
@@ -93,12 +94,19 @@ export const SideComponent: React.FC = () => {
 
   const collapsed = useSelector((state: RootState) => state.collapseSlice.isCollapsed);
   const dispatch = useDispatch();
+  const classButton = collapsed ? 'ml-[-16px] absolute mt-[20px] left-[80px]' : 'ml-[-16px] absolute mt-[20px] left-[240px]';
 
   return (
     <Sider className='flex flex-col h-screen align-center justify-center' width={240} theme='light' collapsible collapsed={collapsed} onCollapse={() => dispatch(toggleCollapsed())}>
+      <Button
+        type="text"
+        icon={collapsed ? <MenuUnfold /> : <MenuOutfold />}
+        onClick={() => dispatch(toggleCollapsed())}
+        className={`${classButton}`}
+      />
       <Flex vertical gap={50} justify='center' align='center' className='mt-[20px]'>
         {collapsed ? <LogoSlim width={44} /> : <Logo />}
-        {collapsed ? <ButtonGradient width='43px'> <PlusIcon /></ButtonGradient> : <ButtonGradient width='208px'><PlusIcon /> Emitir documento</ButtonGradient>}
+        <DropdownEmitirDocumentComponent />
       </Flex>
       <Menu
         onClick={onClick}
