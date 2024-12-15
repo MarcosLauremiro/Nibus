@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import type { FormProps } from 'antd';
-import { Button, Flex, Form, Input, message } from 'antd';
-import api from '../../../service/api';
-import { useNavigate } from 'react-router';
+import { Button, Flex, Form, Input } from 'antd';
+import { AuthContext } from '../../../provider/AuthContext';
 
 type FieldType = {
     email?: string;
@@ -12,19 +11,7 @@ type FieldType = {
 const StyleImput = "border rounded-lg w-full h-[40px] p-[10px]";
 
 export const FormLogin: React.FC = () => {
-    const navigate = useNavigate();
-
-    const login = (values: FieldType) => {
-        api.post("/auth", values).then((res) => {
-            message.success('Login realizado com sucesso!');
-            localStorage.setItem('@bus_token', res.data.acessToken);
-            navigate("/dashboard");
-        }).catch((err) => {
-            message.error("Erro ao realizar login");
-            message.error("Verifique suas credenciais");
-            console.log(err)
-        })
-    }
+    const {login} = useContext(AuthContext);
 
     const onFinish: FormProps<FieldType>['onFinish'] = (values) => {
         login(values);
