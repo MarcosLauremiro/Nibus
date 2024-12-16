@@ -28,25 +28,15 @@ const items: MenuItem[] = [
       },
       {
         key: 'sub2',
-        label: 'Emissões',
-        icon: <PlusCircleOutlined style={iconSize} />,
-        children: [
-          { key: '5', label: 'Emitir CTe' },
-          { key: '6', label: 'Emitir MDFe' },
-          { key: '7', label: 'Emitir Contrato' },
-        ],
-      },
-      {
-        key: 'sub3',
         label: 'Documentos',
         icon: <FilePdfOutlined style={iconSize} />,
         children: [
           { key: '8', label: 'Listar CTe' },
           { key: '9', label: 'Listar MDFe' },
-          { key: '10', label: 'Emitir Contratos' },
+          { key: '10', label: 'Listar Contratos' },
         ],
       }, {
-        key: 'sub4',
+        key: 'sub3',
         label: 'Financeiro',
         icon: <DollarOutlined style={iconSize} />,
         children: [
@@ -56,7 +46,7 @@ const items: MenuItem[] = [
         ],
       },
       {
-        key: 'sub5',
+        key: 'sub4',
         label: 'Envolvidos',
         icon: <TeamOutlined style={iconSize} />,
         children: [
@@ -65,7 +55,7 @@ const items: MenuItem[] = [
         ],
       },
       {
-        key: 'sub6',
+        key: 'sub5',
         label: 'Veículos',
         icon: <TruckOutlined style={iconSize} />,
         children: [

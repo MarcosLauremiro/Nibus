@@ -1,19 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { DownOutlined, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Avatar, Dropdown, Flex, Space } from 'antd';
 import perfil from '../../../assets/perfil.svg';
-import { useNavigate } from 'react-router';
+import { AuthContext } from '../../../provider/AuthContext';
+import { RootState } from '../../../store/store';
+import { useSelector } from 'react-redux';
 
 export const DropDownPerfilComponent: React.FC = () => {
-    const navigate = useNavigate();
-
-    const changeLogout = () => {
-        console.log('Logout');
-        window.localStorage.clear();
-        navigate('/login');
-
-    }
+    const {logout} = useContext(AuthContext);
+    const user = useSelector((state: RootState) => state.userSlice.user)
 
     const items: MenuProps['items'] = [
         {
@@ -41,7 +37,7 @@ export const DropDownPerfilComponent: React.FC = () => {
         {
             key: '3',
             label: (
-                <button onClick={changeLogout}>
+                <button onClick={logout}>
                     Desconectar
                 </button>
             ),
@@ -55,7 +51,7 @@ export const DropDownPerfilComponent: React.FC = () => {
                 <Flex>
                     <Avatar src={<img src={perfil} alt="avatar" />} />
                     <div className="flex flex-col ml-2">
-                        <p className="text-[16px] font-bold">Name Completo</p>
+                        <p className="text-[16px] font-bold">{user.name}</p>
                         <p className="text-[14px] font-normal">Empresa</p>
                     </div>
                 </Flex>

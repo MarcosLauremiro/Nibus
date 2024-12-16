@@ -1,4 +1,5 @@
 import { AuthProvider } from "./AuthContext";
+import { CompanyProvider } from "./CompanyContext";
 
 interface ContextProviderProps {
     children: React.ReactNode;
@@ -7,7 +8,9 @@ interface ContextProviderProps {
 export const ContextProvider: React.FC<ContextProviderProps> = ({ children }) => {
     return (
         <AuthProvider>
-            {children}
+            <CompanyProvider>
+                {children}
+            </CompanyProvider>
         </AuthProvider>
     )
 };

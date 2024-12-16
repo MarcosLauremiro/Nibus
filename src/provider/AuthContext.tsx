@@ -2,20 +2,23 @@ import { createContext } from "react";
 import { useNavigate } from "react-router";
 import api from "../service/api";
 import { message } from "antd";
+import { useDispatch } from "react-redux";
 
-export interface AutphProps {
+interface AutphProps {
     children: React.ReactNode;
 }
 
-export interface AuthContextProps {
+interface AuthContextProps {
     login: (values: any) => void;
     logout: () => void;
+    loginSession: () => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({} as AuthContextProps);
 
 export const AuthProvider: React.FC<AutphProps> = ({ children }) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const login = (values: any) => {
         try {
@@ -27,12 +30,13 @@ export const AuthProvider: React.FC<AutphProps> = ({ children }) => {
                 message.error("Erro ao realizar login");
                 message.error("Verifique suas credenciais");
                 console.log(err)
-            })} 
-            catch (error) {
-                message.error("Erro ao realizar login");
-                message.error("Verifique suas credenciais");
-                console.log(error)
-            }
+            })
+        }
+        catch (error) {
+            message.error("Erro ao realizar login");
+            message.error("Verifique suas credenciais");
+            console.log(error)
+        }
     }
 
     const logout = () => {
@@ -41,8 +45,24 @@ export const AuthProvider: React.FC<AutphProps> = ({ children }) => {
         navigate("/login");
     }
 
+    const loginSession = () => {
+        try {
+            api.get("/auth/session", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('@bus_token')}`
+                }
+            }).then((res) => {
+                dispatch({ type: 'user/setUser', payload: res.data });
+            }).catch((err) => {
+                console.log(err)
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <AuthContext.Provider value={{ login, logout }}>
+        <AuthContext.Provider value={{ login, logout, loginSession }}>
             {children}
         </AuthContext.Provider>
     )

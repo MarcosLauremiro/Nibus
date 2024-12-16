@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import darkModeReducer from "./darkmode/darkModeSlice";
 import collapsedReducer from "./collapsed/CollapsedSlice";
+import userReducer from "./user/UserSlice";
+import companyReducer from "./company/CompanySlice";
 
 export const store = configureStore({
     reducer: {
-        darkMode: darkModeReducer,
         collapseSlice: collapsedReducer,
+        userSlice: userReducer,
+        companySlice: companyReducer
     },
 })
 

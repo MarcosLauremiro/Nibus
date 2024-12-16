@@ -6,6 +6,7 @@ import { LayoutComponent } from "../components/layout";
 import { DashboardPage } from "../pages/Dashboard";
 import { ProtectRouter } from "./protectRouter";
 import { ListCarPage } from "../pages/Car/NewVehicles";
+import { ListCte } from "../pages/Documents/ListCTe";
 
 export const RouterMain: React.FC = () => {
     return (
@@ -23,6 +24,7 @@ export const RouterMain: React.FC = () => {
                     } 
                 />
                 <Route path="/vehicles/new" element={<LayoutComponent><ListCarPage/></LayoutComponent>} />
+                <Route path="/listCre" element={<LayoutComponent><ListCte/></LayoutComponent>} />
             </Route>
         </Routes>
     );
